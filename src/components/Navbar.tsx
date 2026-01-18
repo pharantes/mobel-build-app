@@ -13,7 +13,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center space-x-2 text-xl font-bold hover:text-primary-200">
             <Hammer className="w-6 h-6" />
-            <span>Möbel Build AI</span>
+            <span>Möbel Build AI - Testing Phase</span>
           </Link>
 
           <div className="flex items-center space-x-6">
