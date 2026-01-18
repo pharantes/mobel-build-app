@@ -37,7 +37,7 @@ export async function GET(
       success: true,
       data: project,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Get project error:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to fetch project' },
@@ -83,7 +83,7 @@ export async function PUT(
       data: project,
       message: 'Project updated successfully',
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Update project error:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to update project' },
@@ -125,7 +125,7 @@ export async function DELETE(
       success: true,
       message: 'Project deleted successfully',
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Delete project error:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to delete project' },

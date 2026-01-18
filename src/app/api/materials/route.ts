@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
     const type = searchParams.get('type');
     const available = searchParams.get('available');
 
-    const query: any = {};
+    const query: Record<string, string | boolean> = {};
     if (type) query.type = type;
     if (available) query.availability = available === 'true';
 
@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
       success: true,
       data: materials,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Get materials error:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to fetch materials' },
@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
       },
       { status: 201 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Create material error:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to create material' },

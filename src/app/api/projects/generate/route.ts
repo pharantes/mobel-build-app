@@ -103,13 +103,14 @@ export async function POST(request: NextRequest) {
       },
       message: 'Furniture design generated successfully',
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Generate furniture error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
       {
         success: false,
         error: 'Failed to generate furniture design',
-        details: error.message,
+        details: errorMessage,
       },
       { status: 500 }
     );

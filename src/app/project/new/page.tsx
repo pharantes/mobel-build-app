@@ -7,13 +7,14 @@ import ProjectForm from '@/components/ProjectForm';
 import { API_ROUTES } from '@/utils/constants';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { ProjectInput } from '@/lib/types';
 
 export default function NewProjectPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (data: any) => {
+  const handleSubmit = async (data: ProjectInput) => {
     setIsLoading(true);
     setError(null);
 
@@ -34,8 +35,8 @@ export default function NewProjectPage() {
 
       // Redirect to project page
       router.push(`/project/${result.data._id}`);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
       setIsLoading(false);
     }
   };

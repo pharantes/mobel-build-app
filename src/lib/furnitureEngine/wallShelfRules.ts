@@ -9,9 +9,7 @@ import {
 import {
   MATERIAL_THICKNESS,
   adjustForThickness,
-  calculateScrewCount,
   determineScrewSize,
-  calculateShelfPinPositions,
 } from './carpentryStandards';
 
 export function generateWallShelf(

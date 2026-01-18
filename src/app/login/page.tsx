@@ -7,11 +7,16 @@ import Link from 'next/link';
 import AuthForm from '@/components/AuthForm';
 import { loginSchema } from '@/utils/validation';
 
+interface LoginData {
+  email: string;
+  password: string;
+}
+
 export default function LoginPage() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (data: any) => {
+  const handleSubmit = async (data: LoginData) => {
     try {
       const result = await signIn('credentials', {
         email: data.email,
@@ -26,7 +31,7 @@ export default function LoginPage() {
 
       router.push('/dashboard');
       router.refresh();
-    } catch (err: any) {
+    } catch {
       setError('An error occurred during login');
     }
   };
@@ -49,7 +54,7 @@ export default function LoginPage() {
           <AuthForm type="login" schema={loginSchema} onSubmit={handleSubmit} />
 
           <p className="text-center text-sm text-gray-600 mt-6">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/register" className="text-primary-600 hover:text-primary-700 font-semibold">
               Create one
             </Link>

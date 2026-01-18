@@ -5,11 +5,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { projectSchema } from '@/utils/validation';
 import { FURNITURE_TYPES, MATERIAL_OPTIONS } from '@/utils/constants';
 import LoadingSpinner from './LoadingSpinner';
+import { ProjectInput } from '@/lib/types';
 
 interface ProjectFormProps {
-  onSubmit: (data: any) => Promise<void>;
+  onSubmit: (data: ProjectInput) => Promise<void>;
   isLoading?: boolean;
-  defaultValues?: any;
+  defaultValues?: Partial<ProjectInput>;
 }
 
 export default function ProjectForm({

@@ -7,11 +7,17 @@ import AuthForm from '@/components/AuthForm';
 import { registerSchema } from '@/utils/validation';
 import { API_ROUTES } from '@/utils/constants';
 
+interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export default function RegisterPage() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (data: any) => {
+  const handleSubmit = async (data: RegisterData) => {
     try {
       const response = await fetch(API_ROUTES.AUTH.REGISTER, {
         method: 'POST',
@@ -30,7 +36,7 @@ export default function RegisterPage() {
 
       // Redirect to login after successful registration
       router.push('/login?registered=true');
-    } catch (err: any) {
+    } catch {
       setError('An error occurred during registration');
     }
   };

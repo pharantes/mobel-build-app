@@ -49,7 +49,7 @@ export async function GET(
       success: true,
       data: pricing,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Get pricing error:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to fetch pricing' },

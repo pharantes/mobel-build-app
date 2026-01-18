@@ -5,7 +5,7 @@ import dbConnect from '@/lib/mongodb';
 import Project from '@/models/Project';
 
 // GET all projects for authenticated user
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const session = await getServerSession(authOptions);
 
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
       success: true,
       data: projects,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Get projects error:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to fetch projects' },

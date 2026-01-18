@@ -7,10 +7,11 @@ import ProtectedRoute from '@/components/ProtectedRoute';
 import ProjectCard from '@/components/ProjectCard';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { Plus } from 'lucide-react';
+import { ProjectOutput } from '@/lib/types';
 
 export default function DashboardPage() {
   const { data: session } = useSession();
-  const [projects, setProjects] = useState<any[]>([]);
+  const [projects, setProjects] = useState<ProjectOutput[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -25,8 +26,8 @@ export default function DashboardPage() {
         }
 
         setProjects(data.data);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
       } finally {
         setIsLoading(false);
       }

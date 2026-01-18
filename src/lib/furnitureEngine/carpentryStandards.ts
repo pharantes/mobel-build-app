@@ -93,8 +93,7 @@ export function determineScrewSize(
  * Calculate shelf pin hole positions
  */
 export function calculateShelfPinPositions(
-  height: number,
-  numShelves: number
+  height: number
 ): number[] {
   const positions: number[] = [];
   const usableHeight = height - 100; // Leave space at top and bottom

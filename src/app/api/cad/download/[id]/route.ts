@@ -53,7 +53,7 @@ export async function GET(
       mimeType = 'image/svg+xml';
       filename = `${project.name.replace(/\s+/g, '_')}.svg`;
     } else {
-      content = generateDXF(project.technicalSpecs.cadCoordinates, project.name);
+      content = generateDXF(project.technicalSpecs.cadCoordinates);
       mimeType = 'application/dxf';
       filename = `${project.name.replace(/\s+/g, '_')}.dxf`;
     }
@@ -65,7 +65,7 @@ export async function GET(
         'Content-Disposition': `attachment; filename="${filename}"`,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('CAD download error:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to generate CAD file' },

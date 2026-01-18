@@ -8,13 +8,14 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import { ArrowLeft, Sparkles, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { formatDate, formatDimensions } from '@/utils/formatters';
+import { ProjectOutput } from '@/lib/types';
 
 export default function ProjectPage() {
   const params = useParams();
   const router = useRouter();
   const projectId = params.id as string;
 
-  const [project, setProject] = useState<any>(null);
+  const [project, setProject] = useState<ProjectOutput | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -31,8 +32,8 @@ export default function ProjectPage() {
         }
 
         setProject(data.data);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
       } finally {
         setIsLoading(false);
       }
@@ -61,8 +62,8 @@ export default function ProjectPage() {
       }
 
       setProject(data.data.project);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setIsGenerating(false);
     }
@@ -85,8 +86,8 @@ export default function ProjectPage() {
       }
 
       router.push('/dashboard');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
       setIsDeleting(false);
     }
   };

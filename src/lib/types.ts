@@ -32,11 +32,11 @@ export interface ProjectOutput {
   userId: string;
   name: string;
   furnitureType: string;
-  dimensions: any;
-  features: any;
+  dimensions: Record<string, number>;
+  features: Record<string, boolean | number>;
   materialPreference: string;
   status: 'draft' | 'generated' | 'completed';
-  technicalSpecs?: any;
+  technicalSpecs?: Record<string, unknown>;
   cadFileUrl?: string;
   estimatedCost?: number;
   createdAt: string;
@@ -75,7 +75,7 @@ export interface PricingBreakdown {
   currency: string;
 }
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;

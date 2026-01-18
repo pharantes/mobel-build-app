@@ -10,8 +10,7 @@ interface DXFLine {
  * DXF is a CAD data file format used for exchanging drawings between AutoCAD and other programs
  */
 export function generateDXF(
-  coordinates: ICADCoordinate[],
-  projectName: string
+  coordinates: ICADCoordinate[]
 ): string {
   const lines = coordinatesToLines(coordinates);
 
@@ -131,7 +130,7 @@ export function generateSVG(
 `;
 
   // Draw rectangles for each part (top view)
-  coordinates.forEach((coord, index) => {
+  coordinates.forEach((coord) => {
     const x = coord.start[0] - minX;
     const y = coord.start[1] - minY;
     const w = coord.end[0] - coord.start[0];
@@ -188,7 +187,7 @@ export function createCADFile(
   format: 'dxf' | 'svg' = 'dxf'
 ): Blob {
   const content = format === 'dxf'
-    ? generateDXF(coordinates, projectName)
+    ? generateDXF(coordinates)
     : generateSVG(coordinates, projectName);
 
   const mimeType = format === 'dxf'

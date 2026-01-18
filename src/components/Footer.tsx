@@ -1,4 +1,5 @@
 import { Github, Mail } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -24,9 +25,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/project/new" className="hover:text-white transition-colors">
+                <Link href="/project/new" className="hover:text-white transition-colors">
                   Create Project
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="hover:text-white transition-colors">
