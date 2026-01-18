@@ -7,7 +7,7 @@ import Project from '@/models/Project';
 // GET single project
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -21,8 +21,10 @@ export async function GET(
 
     await dbConnect();
 
+    const { id } = await params;
+
     const project = await Project.findOne({
-      _id: params.id,
+      _id: id,
       userId: session.user.id,
     });
 
@@ -49,7 +51,7 @@ export async function GET(
 // PUT update project
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -65,8 +67,10 @@ export async function PUT(
 
     await dbConnect();
 
+    const { id } = await params;
+
     const project = await Project.findOneAndUpdate(
-      { _id: params.id, userId: session.user.id },
+      { _id: id, userId: session.user.id },
       { $set: body },
       { new: true, runValidators: true }
     );
@@ -95,7 +99,7 @@ export async function PUT(
 // DELETE project
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -109,8 +113,10 @@ export async function DELETE(
 
     await dbConnect();
 
+    const { id } = await params;
+
     const project = await Project.findOneAndDelete({
-      _id: params.id,
+      _id: id,
       userId: session.user.id,
     });
 

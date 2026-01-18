@@ -7,7 +7,7 @@ import Project from '@/models/Project';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { projectId: string } }
+  { params }: { params: Promise<{ projectId: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -21,9 +21,11 @@ export async function GET(
 
     await dbConnect();
 
+    const { projectId } = await params;
+
     // Verify project belongs to user
     const project = await Project.findOne({
-      _id: params.projectId,
+      _id: projectId,
       userId: session.user.id,
     });
 
@@ -35,7 +37,7 @@ export async function GET(
     }
 
     const pricing = await PricingInfo.findOne({
-      projectId: params.projectId,
+      projectId,
     }).populate('materials.materialId');
 
     if (!pricing) {

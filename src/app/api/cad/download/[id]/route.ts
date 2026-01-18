@@ -7,7 +7,7 @@ import { generateDXF, generateSVG } from '@/lib/cadGenerator';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -21,8 +21,10 @@ export async function GET(
 
     await dbConnect();
 
+    const { id } = await params;
+
     const project = await Project.findOne({
-      _id: params.id,
+      _id: id,
       userId: session.user.id,
     });
 
