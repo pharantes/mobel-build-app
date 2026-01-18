@@ -6,18 +6,13 @@ import Link from 'next/link';
 import AuthForm from '@/components/AuthForm';
 import { registerSchema } from '@/utils/validation';
 import { API_ROUTES } from '@/utils/constants';
-
-interface RegisterData {
-  name: string;
-  email: string;
-  password: string;
-}
+import { FieldValues } from 'react-hook-form';
 
 export default function RegisterPage() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (data: RegisterData) => {
+  const handleSubmit = async (data: FieldValues) => {
     try {
       const response = await fetch(API_ROUTES.AUTH.REGISTER, {
         method: 'POST',

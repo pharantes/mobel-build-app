@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
+import { useForm, FieldValues } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import LoadingSpinner from './LoadingSpinner';
@@ -8,8 +8,8 @@ import { z } from 'zod';
 
 interface AuthFormProps {
   type: 'login' | 'register';
-  schema: z.ZodSchema<{ email: string; password: string; name?: string }>;
-  onSubmit: (data: Record<string, string>) => Promise<void>;
+  schema: z.ZodSchema;
+  onSubmit: (data: FieldValues) => Promise<void>;
 }
 
 export default function AuthForm({ type, schema, onSubmit }: AuthFormProps) {
@@ -24,7 +24,7 @@ export default function AuthForm({ type, schema, onSubmit }: AuthFormProps) {
     resolver: zodResolver(schema),
   });
 
-  const onSubmitForm = async (data: Record<string, string>) => {
+  const onSubmitForm = async (data: FieldValues) => {
     setIsLoading(true);
     setError(null);
 

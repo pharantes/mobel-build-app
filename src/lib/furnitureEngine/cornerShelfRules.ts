@@ -142,7 +142,7 @@ export function generateCornerShelf(
   });
 
   if (adjustableShelves) {
-    const pinPositions = calculateShelfPinPositions(verticalHeight, numShelves || 3);
+    const pinPositions = calculateShelfPinPositions(verticalHeight);
     hardware.push({
       item: 'shelf_pins',
       size: '5mm',

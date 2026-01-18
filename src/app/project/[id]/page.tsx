@@ -114,6 +114,18 @@ export default function ProjectPage() {
     );
   }
 
+  if (!project) {
+    return (
+      <ProtectedRoute>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-gray-600">Project not found</p>
+          </div>
+        </div>
+      </ProtectedRoute>
+    );
+  }
+
   const furnitureTypeLabels: Record<string, string> = {
     corner_shelf: 'Corner Shelf',
     wall_shelf: 'Wall Shelf',

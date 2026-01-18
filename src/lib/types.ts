@@ -28,15 +28,34 @@ export interface ProjectInput {
 }
 
 export interface ProjectOutput {
+  _id: string;
   id: string;
   userId: string;
   name: string;
   furnitureType: string;
-  dimensions: Record<string, number>;
+  dimensions: {
+    width: number;
+    depth: number;
+    height: number;
+    cornerAngle?: number;
+  };
   features: Record<string, boolean | number>;
   materialPreference: string;
   status: 'draft' | 'generated' | 'completed';
-  technicalSpecs?: Record<string, unknown>;
+  technicalSpecs?: {
+    cutList: Array<{
+      part: string;
+      dimensions: string;
+      quantity: number;
+      material: string;
+    }>;
+    hardware: Array<{
+      item: string;
+      size: string;
+      quantity: number;
+    }>;
+    assemblyInstructions: string[];
+  };
   cadFileUrl?: string;
   estimatedCost?: number;
   createdAt: string;

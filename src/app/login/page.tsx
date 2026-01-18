@@ -6,17 +6,13 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import AuthForm from '@/components/AuthForm';
 import { loginSchema } from '@/utils/validation';
-
-interface LoginData {
-  email: string;
-  password: string;
-}
+import { FieldValues } from 'react-hook-form';
 
 export default function LoginPage() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (data: LoginData) => {
+  const handleSubmit = async (data: FieldValues) => {
     try {
       const result = await signIn('credentials', {
         email: data.email,

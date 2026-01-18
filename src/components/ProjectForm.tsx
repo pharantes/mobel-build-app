@@ -8,7 +8,7 @@ import LoadingSpinner from './LoadingSpinner';
 import { ProjectInput } from '@/lib/types';
 
 interface ProjectFormProps {
-  onSubmit: (data: ProjectInput) => Promise<void>;
+  onSubmit: (data: Partial<ProjectInput>) => Promise<void>;
   isLoading?: boolean;
   defaultValues?: Partial<ProjectInput>;
 }

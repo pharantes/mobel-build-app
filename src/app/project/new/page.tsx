@@ -14,7 +14,7 @@ export default function NewProjectPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (data: ProjectInput) => {
+  const handleSubmit = async (data: Partial<ProjectInput>) => {
     setIsLoading(true);
     setError(null);
 
